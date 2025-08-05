@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    restart: unless-stopped # Restart policy to keep the container running
+    environment:
+      - 'POSTGRES_DB=platzi_play_db'
+      - 'POSTGRES_PASSWORD=Chevy17'
+      - 'POSTGRES_USER=root'
+    ports:
+      - '5432:5432' # Expose PostgreSQL on port 5432
+    volumes:
+      - pgdata:/data/postgres # Persist data in a named volume
+
+volumes:
+  pgdata: # Named volume for PostgreSQL data
