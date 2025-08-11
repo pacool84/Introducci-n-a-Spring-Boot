@@ -1,0 +1,22 @@
+package com.platzi.day.domain.service;
+
+import com.platzi.day.domain.dto.MovieDto;
+import com.platzi.day.domain.repository.MovieRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class MovieService {
+
+    private final MovieRepository movieRepository; //
+
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
+
+    //Metodo para recuperar una lista de peliculas DTO
+    public List<MovieDto> getAllMovies(){
+        return this.movieRepository.getAllMovies();
+    }
+}
