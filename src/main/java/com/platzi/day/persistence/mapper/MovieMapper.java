@@ -2,6 +2,8 @@ package com.platzi.day.persistence.mapper;
 
 import com.platzi.day.domain.dto.MovieDto;
 import com.platzi.day.persistence.entity.MovieEntity;
+import org.mapstruct.InheritConfiguration;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,4 +18,8 @@ public interface MovieMapper {
     @Mapping(source = "clasificacion", target = "rating")
     MovieDto toDto(MovieEntity entity);
     List<MovieDto> toDto(Iterable<MovieEntity> entities);
+
+    @InheritInverseConfiguration // Hereda las configuraciones del mapeo anterior
+    @Mapping(source = "genre", target = "genero", qualifiedByName = "genreToString")
+    MovieEntity toEntity(MovieDto dto);
 }

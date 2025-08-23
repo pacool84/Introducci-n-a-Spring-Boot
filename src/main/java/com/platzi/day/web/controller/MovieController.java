@@ -2,11 +2,9 @@ package com.platzi.day.web.controller;
 
 import com.platzi.day.domain.dto.MovieDto;
 import com.platzi.day.domain.service.MovieService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,4 +34,12 @@ public class MovieController {
             return ResponseEntity.notFound().build(); // Devuelve 404 Not Found si no se encuentra
         }
     }
+
+    // Endpoint para agregar una nueva pelicula
+    @PostMapping // Indica que responde a peticiones POST
+    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.movieService.addMovie(movieDto)); // Devuelve 201 Created con la pelicula creada
+    }
+
 }
