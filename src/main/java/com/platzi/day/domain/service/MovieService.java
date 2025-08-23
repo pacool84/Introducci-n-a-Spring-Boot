@@ -19,4 +19,8 @@ public class MovieService {
     public List<MovieDto> getAllMovies(){
         return this.movieRepository.getAllMovies();
     }
+
+    public MovieDto getById(long id) {
+        return this.movieRepository.getById(id);
+    }
 }

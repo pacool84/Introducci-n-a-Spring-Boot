@@ -7,4 +7,5 @@ import java.util.List;
 //Quien quiera consultarme tendra acceso a consultar todas las peliculas
 public interface MovieRepository {
     List<MovieDto> getAllMovies();
+    MovieDto getById(long id);
 }
