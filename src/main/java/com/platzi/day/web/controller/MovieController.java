@@ -36,10 +36,10 @@ public class MovieController {
     }
 
     // Endpoint para agregar una nueva pelicula
-    @PostMapping // Indica que responde a peticiones POST
-    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.movieService.addMovie(movieDto)); // Devuelve 201 Created con la pelicula creada
+    @PostMapping // Indica que responde a peticiones POST en la ruta /movies
+    public ResponseEntity<MovieDto> add(@RequestBody MovieDto movieDto) {
+        MovieDto movieDtoResponse = this.movieService.add(movieDto); // Llama al servicio para agregar la pelicula
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieDtoResponse); // Devuelve 201 Created con la pelicula creada
     }
 
 }

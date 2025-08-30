@@ -24,7 +24,7 @@ public class MovieService {
         return this.movieRepository.getById(id);
     }
 
-    public MovieDto addMovie(MovieDto movieDto) {
+    public MovieDto add(MovieDto movieDto) {
         return this.movieRepository.save(movieDto);
     }
 }
