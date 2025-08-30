@@ -1,6 +1,7 @@
 package com.platzi.day.domain.service;
 
 import com.platzi.day.domain.dto.MovieDto;
+import com.platzi.day.domain.dto.UpdateMovieDto;
 import com.platzi.day.domain.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +21,18 @@ public class MovieService {
         return this.movieRepository.getAllMovies();
     }
 
+    //Metodo para recuperar una pelicula por su ID
     public MovieDto getById(long id) {
         return this.movieRepository.getById(id);
     }
 
+    //Metodo para agregar una nueva pelicula
     public MovieDto add(MovieDto movieDto) {
         return this.movieRepository.save(movieDto);
+    }
+
+    //Metodo para actualizar una pelicula existente
+    public MovieDto update(long id, UpdateMovieDto updateMovieDto) {
+        return this.movieRepository.update(id, updateMovieDto);
     }
 }

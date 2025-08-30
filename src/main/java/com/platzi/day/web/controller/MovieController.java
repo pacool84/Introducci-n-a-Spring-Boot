@@ -1,6 +1,7 @@
 package com.platzi.day.web.controller;
 
 import com.platzi.day.domain.dto.MovieDto;
+import com.platzi.day.domain.dto.UpdateMovieDto;
 import com.platzi.day.domain.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,12 @@ public class MovieController {
     public ResponseEntity<MovieDto> add(@RequestBody MovieDto movieDto) {
         MovieDto movieDtoResponse = this.movieService.add(movieDto); // Llama al servicio para agregar la pelicula
         return ResponseEntity.status(HttpStatus.CREATED).body(movieDtoResponse); // Devuelve 201 Created con la pelicula creada
+    }
+
+    // Endpoint para actualizar una pelicula existente
+    @PutMapping("/{id}") // Indica que responde a peticiones PUT en la ruta /movies/{id}
+    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody UpdateMovieDto updateMovieDto) {
+        return ResponseEntity.ok(this.movieService.update(id, updateMovieDto)); // Devuelve 200 OK con la pelicula actualizada
     }
 
 }
