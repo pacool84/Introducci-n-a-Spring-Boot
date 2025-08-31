@@ -49,10 +49,6 @@ public class MovieEntityRepository implements MovieRepository {
 
         if(movieEntity == null) return null;
 
-        movieEntity.setTitulo(updateMovieDto.title());
-        movieEntity.setFechaEstreno(updateMovieDto.releaseDate());
-        movieEntity.setClasificacion(BigDecimal.valueOf(updateMovieDto.rating()));
-
         this.movieMapper.updateEntityFromDto(updateMovieDto, movieEntity);
         return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
     }

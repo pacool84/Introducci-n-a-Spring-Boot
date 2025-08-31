@@ -3,10 +3,7 @@ package com.platzi.day.persistence.mapper;
 import com.platzi.day.domain.dto.MovieDto;
 import com.platzi.day.domain.dto.UpdateMovieDto;
 import com.platzi.day.persistence.entity.MovieEntity;
-import org.mapstruct.InheritConfiguration;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 import java.util.List;
 
