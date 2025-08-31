@@ -49,4 +49,11 @@ public class MovieController {
         return ResponseEntity.ok(this.movieService.update(id, updateMovieDto)); // Devuelve 200 OK con la pelicula actualizada
     }
 
+    // Endpoint para eliminar una pelicula
+    @DeleteMapping("/{id}") // Indica que responde a peticiones DELETE en la ruta /movies/{id}
+    public ResponseEntity<Void> delete(@PathVariable long id) {
+        this.movieService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
