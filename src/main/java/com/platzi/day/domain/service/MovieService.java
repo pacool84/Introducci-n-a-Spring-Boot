@@ -3,6 +3,7 @@ package com.platzi.day.domain.service;
 import com.platzi.day.domain.dto.MovieDto;
 import com.platzi.day.domain.dto.UpdateMovieDto;
 import com.platzi.day.domain.repository.MovieRepository;
+import dev.langchain4j.agent.tool.Tool;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class MovieService {
     }
 
     //Metodo para recuperar una lista de peliculas DTO
+    @Tool("Busca todas las peliculas dentro de la plataforma")
     public List<MovieDto> getAllMovies(){
         return this.movieRepository.getAllMovies();
     }

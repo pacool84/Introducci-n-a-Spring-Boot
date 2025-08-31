@@ -1,8 +1,10 @@
 package com.platzi.day.web.controller;
 
 import com.platzi.day.domain.dto.MovieDto;
+import com.platzi.day.domain.dto.SuggestRequestDto;
 import com.platzi.day.domain.dto.UpdateMovieDto;
 import com.platzi.day.domain.service.MovieService;
+import com.platzi.day.domain.service.PlatziPlayAIService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.List;
 @RequestMapping("/movies") // Ruta base para todos los endpoints en este controlador
 public class MovieController {
     private final MovieService movieService;
+    private final PlatziPlayAIService aiService;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, PlatziPlayAIService aiService) {
         this.movieService = movieService;
+        this.aiService = aiService;
     }
 
     // Endpoint para obtener todas las peliculas
@@ -34,6 +38,12 @@ public class MovieController {
         } else {
             return ResponseEntity.notFound().build(); // Devuelve 404 Not Found si no se encuentra
         }
+    }
+
+    // Endpoint para generar una sugerencia de pelicula
+    @PostMapping("/suggest") // Indica que responde a peticiones POST en la ruta /movies/suggestion
+    public ResponseEntity<String> generateMovieSuggestion(@RequestBody SuggestRequestDto suggestRequestDto) {
+        return ResponseEntity.ok(this.aiService.generateMovieSuggestion(suggestRequestDto.userPreferences()));
     }
 
     // Endpoint para agregar una nueva pelicula
