@@ -5,6 +5,7 @@ import com.platzi.day.domain.dto.SuggestRequestDto;
 import com.platzi.day.domain.dto.UpdateMovieDto;
 import com.platzi.day.domain.service.MovieService;
 import com.platzi.day.domain.service.PlatziPlayAIService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class MovieController {
 
     // Endpoint para actualizar una pelicula existente
     @PutMapping("/{id}") // Indica que responde a peticiones PUT en la ruta /movies/{id}
-    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody UpdateMovieDto updateMovieDto) {
+    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody @Valid UpdateMovieDto updateMovieDto) {
         return ResponseEntity.ok(this.movieService.update(id, updateMovieDto)); // Devuelve 200 OK con la pelicula actualizada
     }
 
