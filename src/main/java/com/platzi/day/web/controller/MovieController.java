@@ -5,6 +5,11 @@ import com.platzi.day.domain.dto.SuggestRequestDto;
 import com.platzi.day.domain.dto.UpdateMovieDto;
 import com.platzi.day.domain.service.MovieService;
 import com.platzi.day.domain.service.PlatziPlayAIService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movies") // Ruta base para todos los endpoints en este controlador
+@Tag(name = "Movie", description = "Operations about movies of PlatziPlay") // Documentacion Swagger
 public class MovieController {
     private final MovieService movieService;
     private final PlatziPlayAIService aiService;
@@ -31,7 +37,11 @@ public class MovieController {
 
     // Endpoint para obtener una pelicula por su ID
     @GetMapping("/{id}") // Indica que responde a peticiones GET en la ruta /movies/{id}
-    public ResponseEntity<MovieDto> getById(@PathVariable long id) {
+    @Operation(summary = "Obtener una pelicula por su ID", description = "Retorna la pelicula que coincide con el ID proporcionado", responses = { // Documentacion Swagger
+            @ApiResponse(responseCode = "200", description = "Pelicula encontrada"),
+            @ApiResponse(responseCode = "404", description = "Pelicula no encontrada", content = @Content)
+    })
+    public ResponseEntity<MovieDto> getById(@Parameter(description = "Identificador de la pelicula a recuperar", example = "9") @PathVariable long id) {
         MovieDto movieDto = this.movieService.getById(id);
 
         if (movieDto != null) {
